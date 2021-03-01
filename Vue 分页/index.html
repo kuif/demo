@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue PC分页类</title>
+    <link rel="stylesheet" href="myPagination.css">
+</head>
+<body>
+<!-- vue ajax获取数据 -->
+<div class="vue_ajax">
+    <!-- <h1>{{ article.msg }}</h1> -->
+    <ul v-for="item in article">
+        <li>{{ item.id }}  {{ item.title }}</li>
+        <li>{{ item.description }}</li>
+    </ul>
+</div>
+<div id="pagination" class="pagination"></div>
+<!-- 引入veujs -->
+<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+<!-- 引入用于配合vuejs执行ajax操作的插件 -->
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+
+<script src="myPagination.js"></script>
+<script>
+    axios.defaults.baseURL = 'https://api.dubiao.com'; // 设置域名
+    axios.defaults.withCredentials = true;  // 跨域请求
+    // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'; // 设置数据传输类型
+
+    // 获取数据的url
+    var pageData = {
+        url: '/Api/Article/articleList',
+        i: 1,
+        height: 0,
+        over: false,
+        total: 0,
+        last_page: 0,
+        per_page: 10,
+    }
+
+    // ajax 获取数据
+    var vm = new Vue({
+        el: '.vue_ajax',
+        data: {
+            article:[]
+        },
+        // 页面加载的时候会自动执行mounted
+        mounted: function () {
+            getArticleList(pageData.i); // 获取数据
+        }
+    });
+
+    /**
+     * [myPagination 分类类]
+     * @return {[type]} [description]
+     */
+    function myPagination() {
+        var page = new Page({
+            id: 'pagination',
+            pageTotal: pageData.last_page, //必填,总页数
+            pageAmount: pageData.per_page,  //每页多少条
+            dataTotal: pageData.total, //总共多少条数据
+            curPage:1, //初始页码,不填默认为1
+            pageSize: 5, //分页个数,不填默认为5
+            showPageTotalFlag:true, //是否显示数据统计,不填默认不显示
+            showSkipInputFlag:true, //是否支持跳转,不填默认不显示
+            getPage: function (page) {
+                //获取当前页数
+               // console.log(page);
+               pageData.i = page; // 页数+1
+               getArticleList(page); // 获取当前页面数据
+            }
+        })
+    }
+
+    /**
+     * [getArticleList 获取文章列表]
+     * @param  {[type]} page [页码]
+     * @return {[type]}      [description]
+     */
+    function getArticleList(page) {
+        // 获取下一页的数据
+        axios.post(pageData.url, Qs.stringify({cat_id:'2', page:page}))
+        .then(function (res) {
+            console.log(res.data)
+            if(res.data.code==1){
+                pageData.total = res.data.data.total;
+                pageData.last_page = res.data.data.last_page;
+                pageData.per_page = res.data.data.per_page;
+                page==1 && myPagination();
+                // vm.article = vm.article.concat(res.data.data.data);
+                vm.article = res.data.data.data;
+            }else{
+                pageData.over = true;
+                loadingToOver();
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

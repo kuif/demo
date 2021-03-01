@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<title>OSS web直传</title>
+	<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+
+	<div id="container" style="margin: 50px;">
+		<h4>您所选择的文件列表：</h4>
+		<br/>		
+
+		<input type="text" class="form-control" id="input_id" style="width: 500px" />
+		<br/>
+
+		<a id="selectfiles" href="javascript:void(0);" class='btn btn-success' data-url="./php/get.php" data-extensions="jpg,mp4" data-input-id="input_id">选择文件</a>
+
+		<!-- <button id="selectfiles" type="button" name="button" class='btn'>选择文件</button> -->
+		<!-- <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a> -->
+	</div>
+
+</body>
+	<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+	<script type="text/javascript" src="lib/md5.min.js"></script>
+	<script type="text/javascript" src="lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="upload.js"></script>
+
+</html>

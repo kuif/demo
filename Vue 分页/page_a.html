@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+	    <style type="text/css">
+	        .pagination{
+	            font-size: 0px;
+	            width: 100%;
+	            padding: 20px 0px;
+	            text-align: center;
+	        }
+	        .pagination a,.pagination p{
+	            padding: 2px 12px;
+	            border: 1px #cccccc solid;
+	            background: #fff;
+	            text-decoration: none;
+	            color: #077ee3;
+	            font-size: 12px;
+	            line-height: 27px;
+	            display: inline-block;
+	            margin: 0px 5px 0px 5px;
+	        }
+	        .pagination p{
+	            cursor: pointer;
+	            color: #cccccc;
+	        }
+	        .pagination a:hover{
+	            color: #077ee3;
+	            background: #fff;
+	            // border: 1px #cccccc solid;
+	            border: 1px #077ee3 solid;
+	        }
+			.pagination a.cur{
+                background: #077ee3;
+                color: #fff;
+                border: 1px #077ee3 solid;
+            }
+            .pagination p:hover{
+                cursor: not-allowed;
+            }
+            .pagination p.pageRemark{
+                border-style: none;
+                background: none;
+                margin-right: 0px;
+                padding: 5px 0px;
+                color: #666;
+            }
+            .pagination p.pageRemark b{
+                color: red;
+            }
+            .pagination p.pageEllipsis{
+                border-style: none;
+                background: none;
+                // padding: 4px 0px;
+                color: #808080;
+            }
+            .pagination .first {
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+            .pagination .last {
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+	    </style>
+    </head>
+    <body>
+        <div class="pagination">
+            <a class="first" href="javascript:;" title="首页">首页</a>
+            <a class="cur" href="javascript:;" title="上一页">上一页</a>
+            <a href="javascript:;" title="第 1 页">1</a>
+            <a href="javascript:;" class="cur">2</a>
+            <a href="javascript:;" title="第 3 页">3</a>
+            <a href="javascript:;" title="第 4 页">4</a>
+            <a href="javascript:;" title="第 5 页">5</a>
+            <a href="javascript:;" title="下一页">下一页</a>
+            <a class="last" href="javascript:;" title="尾页">尾页</a>
+            <p class="pageRemark pageEllipsis">共<b> 5</b>页<b> 5</b>条数据</p>
+        </div>
+    </body>
+</html>
